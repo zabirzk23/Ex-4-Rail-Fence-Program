@@ -1,4 +1,4 @@
-# Ex-4 Rail-Fence-Program
+# Ex-5 Rail-Fence-Program
 
 # IMPLEMENTATION OF RAIL FENCE – ROW & COLUMN TRANSFORMATION TECHNIQUE
 
@@ -20,6 +20,44 @@ STEP-5: Read the characters row wise or column wise in the former order to get t
 
 # PROGRAM
 
+```
+#include <stdio.h>
+#include <string.h>
+int main() {
+ char str[1000];
+ int rails, len;
+ printf("Enter a Secret Message: ");
+ fgets(str, sizeof(str), stdin);
+ len = strlen(str);
+ if(str[len-1] == '\n') str[len-1] = '\0'; // Remove newline
+ len = strlen(str);
+ printf("Enter number of rails: ");
+ scanf("%d", &rails);
+ int code[rails][len];
+ for(int i = 0; i < rails; i++) {
+ for(int j = 0; j < len; j++) {
+ code[i][j] = 0;
+ }
+ }
+ int dir = 1; // 1: moving down, -1: moving up
+ int row = 0;
+ for(int j = 0; j < len; j++) {
+ code[row][j] = str[j];
+ row += dir;
+ if(row == 0 || row == rails-1) dir = -dir; // Change direction
+ }
+ printf("Encrypted Message: ");
+ for(int i = 0; i < rails; i++) {
+ for(int j = 0; j < len; j++) {
+ if(code[i][j] != 0) printf("%c", code[i][j]);
+ }
+ }
+ printf("\n");
+ return 0;
+}
+```
+
 # OUTPUT
 
-# RESULT
+<img width="1122" height="624" alt="image" src="https://github.com/user-attachments/assets/e75472d1-cd54-4707-94fc-283f7798084e" />
+
